@@ -14,6 +14,8 @@ namespace WebApp_BookFlightsApi
             Host.CreateDefaultBuilder(args)
                  .ConfigureWebHostDefaults(webBuilder =>
                  {
+                     webBuilder.UseKestrel();
+                     webBuilder.UseUrls("http://localhost:5001", "http://172.20.10.2:5001");
                      webBuilder.UseStartup<Startup>();
                  });
     }

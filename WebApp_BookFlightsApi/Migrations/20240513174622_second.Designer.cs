@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WebApp_BookFlightsApi.DataAccess;
@@ -10,9 +11,10 @@ using WebApp_BookFlightsApi.DataAccess;
 namespace WebApp_BookFlightsApi.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    partial class ApiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240513174622_second")]
+    partial class second
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -159,19 +161,10 @@ namespace WebApp_BookFlightsApi.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<long?>("IdTripDeparture")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("IdTripReturn")
+                    b.Property<long?>("IdTrip")
                         .HasColumnType("bigint");
 
                     b.Property<long?>("IdUser")
-                        .HasColumnType("bigint");
-
-                    b.Property<double>("TotalPrice")
-                        .HasColumnType("double precision");
-
-                    b.Property<long?>("trip2Id")
                         .HasColumnType("bigint");
 
                     b.Property<long?>("tripId")
@@ -181,8 +174,6 @@ namespace WebApp_BookFlightsApi.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("trip2Id");
 
                     b.HasIndex("tripId");
 
@@ -210,8 +201,8 @@ namespace WebApp_BookFlightsApi.Migrations
                     b.Property<DateTime>("DateDeparture")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<DateTime>("Duration")
-                        .HasColumnType("timestamp without time zone");
+                    b.Property<TimeSpan>("Duration")
+                        .HasColumnType("interval");
 
                     b.Property<string>("From")
                         .HasColumnType("text");
@@ -373,10 +364,6 @@ namespace WebApp_BookFlightsApi.Migrations
 
             modelBuilder.Entity("WebApp_BookFlightsApi.DataAccess.Entities.TicketEntity", b =>
                 {
-                    b.HasOne("WebApp_BookFlightsApi.DataAccess.Entities.TripEntity", "trip2")
-                        .WithMany()
-                        .HasForeignKey("trip2Id");
-
                     b.HasOne("WebApp_BookFlightsApi.DataAccess.Entities.TripEntity", "trip")
                         .WithMany()
                         .HasForeignKey("tripId");
@@ -386,8 +373,6 @@ namespace WebApp_BookFlightsApi.Migrations
                         .HasForeignKey("userId");
 
                     b.Navigation("trip");
-
-                    b.Navigation("trip2");
 
                     b.Navigation("user");
                 });

@@ -34,6 +34,14 @@ namespace WebApp_BookFlightsApi.Controllers
             return Ok(result);
         }
 
+        [HttpPost("updateById")]
+        public async Task<IActionResult> UpdateById(UpdateUserDto request)
+        {
+            var result = await _userService.UpdateUserById(request);
+
+            return Ok(result);
+        }
+
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDto request)
         {

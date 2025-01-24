@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace WebApp_BookFlightsApi.Domain.Identity.Models
 {
@@ -17,6 +15,8 @@ namespace WebApp_BookFlightsApi.Domain.Identity.Models
         public DateTime? CreatedAt { get; set; }
         public string Token { get; set; }
         public string Message { get; set; }
+        public IList<string> Roles { get; set; }
+
 
         public UserDto()
         {
@@ -35,6 +35,17 @@ namespace WebApp_BookFlightsApi.Domain.Identity.Models
             this.Email = Email;
             this.Birth = Birth;
             this.CurrentLocation = CurrentLocation;
+        }
+        public UserDto(long? IdUser, string Firstname, string Lastname, string UserName, string Email, DateTime Birth, string CurrentLocation, IList<string> Roles)
+        {
+            this.IdUser = IdUser;
+            this.Firstname = Firstname;
+            this.Lastname = Lastname;
+            this.UserName = UserName;
+            this.Email = Email;
+            this.Birth = Birth;
+            this.CurrentLocation = CurrentLocation;
+            this.Roles = Roles;
         }
     }
 }

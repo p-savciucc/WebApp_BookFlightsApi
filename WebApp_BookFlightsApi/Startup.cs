@@ -86,7 +86,6 @@ namespace WebApp_BookFlightsApi
                     };
                 });
             services.AddAuthorization();
-            //services.AddSwaggerGen();
 
             services.AddCors(options =>
             {
@@ -101,6 +100,8 @@ namespace WebApp_BookFlightsApi
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IJwtGenerator, JwtGenerator>();
+            services.AddScoped<ITripService, TripService>();
+            services.AddScoped<ITicketService, TicketService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -111,7 +112,6 @@ namespace WebApp_BookFlightsApi
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApp_BookFlightsApi v1"));
             }
             app.UseSwagger();
-            //app.UseCors("CorsPolicy");
             app.UseCors(corsPolicy);
 
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BookFlights v1"));
@@ -132,12 +132,6 @@ namespace WebApp_BookFlightsApi
                     await context.Response.WriteAsync(exception.Message);
                 }
             }));
-
-            //app.UseStaticFiles(new StaticFileOptions
-            //{
-            //    FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "Images")),
-            //    RequestPath = "/Images"
-            //});
 
             app.UseRouting();
             app.UseSwagger();

@@ -12,5 +12,7 @@ namespace WebApp_BookFlightsApi.Domain.Identity.Interfaces
         Task<UserDto> Login(LoginDto request);
         UserDto GetUserById(long? userId);
         UserDto GetUserByEmail(string email);
+        Task<bool> UpdateUserById(UpdateUserDto userDto);
+
     }
 }
